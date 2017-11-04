@@ -1,10 +1,38 @@
 <html>
     <head>
         <title>WebRTC</title>
+        <link href="./css/style.css" rel="stylesheet" />
     </head>
     <body>
-        <p>Home</p>
-        <video id="localStream" width="300px" controls></video>
+        <div class="container">
+            <div class="header">
+                <h2>Video Call Basic</h2>
+            </div>
+            <div class="main">
+                <div class="myBox">
+                    <p>Your Video</p>
+                    <hr>
+                    <video id="localStream" width="100%" controls></video>
+                    <div class="informationBox">
+                        <P>My connect token</P>
+                        <textarea rows="5" cols="55" id="txtMysignal"></textarea>
+                    </div>
+                </div>
+                <div class="friendBox">
+                     <p>Friend's Video</p>
+                     <hr>
+                    <video id="friendStream" width="100%" controls></video>
+                    <div class="informationBox">
+                            <P>Friend connect token</P>
+                            <input id="txtFriendSignal"  width="100%" type="text" placeholder="Type a connect token..."/>
+                            
+                            <button id="btnconnect"> Video Call </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
     </body>
     <script src="./bundle.js"></script>
 </html>
