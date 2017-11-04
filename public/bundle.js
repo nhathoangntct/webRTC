@@ -67,10 +67,11 @@
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const openCamera = __webpack_require__(1);
+const openStream = __webpack_require__(1);
+const playVideo = __webpack_require__(2);
+
 openCamera();
 
-console.log('Hello');
 
 /***/ }),
 /* 1 */
@@ -78,18 +79,27 @@ console.log('Hello');
 
 function openCamera()
 {
-    navigator.mediaDevices.getUserMedia({audio : false, video :{ width: 1280, height: 720 }})
+    navigator.mediaDevices.getUserMedia({audio : false, video :{ width: '1280', height: 720 }})
     .then(stream => {
-        const video = document.getElementById('localStream');
-        video.srcObject = stream;
-        video.onloadedmetadata = function (err) {
-            video.play();           
-        };
-        console.log(video.srcObject);
+        playVideo(stream, 'localStream');
     })
     .catch(err => console.log(err));
 }
 module.exports = openCamera;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+function playVideo(stream, idVideo)
+{
+    const video = document.getElementById('idVideo');
+    video.srcObject = stream;
+    video.onloadedmetadata = function (err) {
+        video.play();           
+    };
+}
+module.exports = playVideo;
 
 /***/ })
 /******/ ]);

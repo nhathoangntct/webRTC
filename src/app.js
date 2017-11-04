@@ -1,4 +1,4 @@
-const openCamera = require('./openCamera.js');
-openCamera();
+const openStream = require('./openStream.js');
+const playVideo = require('./playVideo');
 
-console.log('Hello');
+openCamera();
