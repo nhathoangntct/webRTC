@@ -1,23 +1,32 @@
 const openStream = require('./openStream.js');
-const Peer = require('simple-peer');
 const $ = require('jquery');
 const playVideo = require('./playVideo');
+const Peer = require('peerjs');
+const uid = require('uid');
+const config = { host: 'mypeer0711.herokuapp.com', port: 443, secure: true, key: 'peerjs' };
 
+function getPeer() {
+    const idPeer = uid(10);
+    $('#txtPeer-id').text(idPeer);
+    return idPeer;
+}
 
-openStream(function(stream){
-    playVideo(stream, 'localStream');
-    const p = new Peer({initiator : location.hash === '#1', trickle :false , stream : stream});
-    p.on('signal', token => {
-        $('#txtMysignal').val(JSON.stringify(token));
-    
-    })
-    
-    p.on('connect', () => console.log('connected'));
-    
-    $('#btnconnect').click(() => {
-        const friendSignal = JSON.parse($('#txtFriendSignal').val());
-        p.signal(friendSignal);
+const peer = new Peer(getPeer(), config);
+
+$('#btnCall').click(() => {
+    const friendId = $('#txtFriendId').val();
+    openStream(stream => {
+        playVideo(stream, 'localStream');
+        const call = peer.call(friendId, stream);
+        call.on('stream', remoteStream => playVideo(remoteStream, 'friendStream'));
     });
+});
 
-    p.on('stream', friendStream => playVideo(friendStream, 'friendStream'));
-})
+peer.on('call', function (call) {
+    openStream(stream => {
+        playVideo(stream, 'localStream');
+        call.answer(stream);
+        call.on('stream', remoteStream => playVideo(remoteStream, 'friendStream'));
+    });
+});
+    console.log(peer);

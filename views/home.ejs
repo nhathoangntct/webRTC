@@ -10,12 +10,10 @@
             </div>
             <div class="main">
                 <div class="myBox">
-                    <p>Your Video</p>
+                    <p>Your Peer: <span id="txtPeer-id"></span></p>
                     <hr>
                     <video id="localStream" width="100%" controls></video>
-                    <div class="informationBox">
-                        <P>My connect token</P>
-                        <textarea rows="5" cols="55" id="txtMysignal"></textarea>
+                    <div class="informationBox">     
                     </div>
                 </div>
                 <div class="friendBox">
@@ -24,9 +22,8 @@
                     <video id="friendStream" width="100%" controls></video>
                     <div class="informationBox">
                             <P>Friend connect token</P>
-                            <input id="txtFriendSignal"  width="100%" type="text" placeholder="Type a connect token..."/>
-                            
-                            <button id="btnconnect"> Video Call </button>
+                            <input id="txtFriendId"  width="100%" type="text" placeholder="Type a connect token..."/>
+                            <button id="btnCall"> Video Call </button>
                     </div>
                 </div>
 
